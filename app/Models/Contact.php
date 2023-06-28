@@ -3,14 +3,17 @@
 namespace App\Models;
 
 use App\Scopes\FilterScope;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Scopes\ContactSearchScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Contact extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public $filterColumns = ['company_id'];
     
     public function company()
     {
@@ -22,8 +25,12 @@ class Contact extends Model
         return $query->orderBy('id', 'desc');
     }
 
-    public static function booted()
+    public static function boot()
     {
+        parent::boot();
+
         static::addGlobalScope(new FilterScope);
+        static::addGlobalScope(new ContactSearchScope);
+
     }
 }

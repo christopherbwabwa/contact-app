@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class ContactController extends Controller
@@ -13,7 +14,11 @@ class ContactController extends Controller
     {
         $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All companies', '');
 
+        DB::enableQueryLog();
+
         $contacts = Contact::latestFirst()->paginate(10);
+
+        dd(DB::getQueryLog());
 
         return view('contacts.index', compact('contacts', 'companies'));
     }
