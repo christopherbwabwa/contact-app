@@ -14,11 +14,11 @@ class ContactController extends Controller
     {
         $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All companies', '');
 
-        DB::enableQueryLog();
+        // DB::enableQueryLog();
 
         $contacts = Contact::latestFirst()->paginate(10);
 
-        dd(DB::getQueryLog());
+        // dd(DB::getQueryLog());
 
         return view('contacts.index', compact('contacts', 'companies'));
     }
