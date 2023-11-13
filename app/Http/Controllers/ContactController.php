@@ -13,12 +13,7 @@ class ContactController extends Controller
     public function index()
     {
         $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All companies', '');
-
-        // DB::enableQueryLog();
-
         $contacts = Contact::latestFirst()->paginate(10);
-
-        // dd(DB::getQueryLog());
 
         return view('contacts.index', compact('contacts', 'companies'));
     }
