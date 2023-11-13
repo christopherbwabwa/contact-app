@@ -26,10 +26,8 @@ class Contact extends Model
         return $query->orderBy('id', 'desc');
     }
 
-    public static function boot()
+    public static function booted()
     {
-        parent::boot();
-
         static::addGlobalScope(new FilterScope);
         static::addGlobalScope(new ContactSearchScope);
 
