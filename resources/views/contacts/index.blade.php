@@ -13,7 +13,7 @@
                                 <h2 class="mb-0">All Contacts</h2>
                                 <div class="ml-auto">
                                     <a href="{{ route('contacts.create') }}" class="btn btn-success">
-                                        <i class="fa fa-plus-circle"></i> Add New
+                                        <i class="fa fa-plus-circle">Add New</i> 
                                     </a>
                                 </div>
                             </div>
