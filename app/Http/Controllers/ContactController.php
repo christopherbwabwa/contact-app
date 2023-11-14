@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\View;
 
 class ContactController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+    }
     public function index()
     {
         $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All companies', '');
