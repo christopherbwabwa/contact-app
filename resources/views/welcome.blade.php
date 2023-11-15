@@ -45,24 +45,19 @@
                     </svg>
                 </div>
 
-                <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                    <div class="text-center text-lg text-gray-500 sm:text-left">
-                        <div class="flex">
+                <div class="items-center justify-center">
 
-                            <a href="{{ route('contacts.index') }}" class="ml-1 underline">
-                                All contacts
-                            </a>
+                    <a href="{{ route('contacts.index') }}" class="ml-1 underline">
+                        All contacts
+                    </a>
 
-                            <a href="{{ route('contacts.create') }}" class="ml-1 underline">
-                                Add contact
-                            </a>
+                    <a href="{{ route('contacts.create') }}" class="ml-1 underline">
+                        Add contact
+                    </a>
 
-                            <a href="{{ route('contacts.show', 4) }}" class="ml-1 underline">
-                                Show a contact
-                            </a>
-                        </div>
-                    </div>
-
+                    {{-- <a href="{{ route('contacts.show', 4) }}" class="ml-1 underline">
+                        Show a contact
+                    </a> --}}
                 </div>
             </div>
         </div>

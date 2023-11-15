@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-    Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
+    Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index')->middleware('verified');
 
     Route::get('contacts/create', [ContactController::class, 'create'])->name('contacts.create');
 
@@ -34,6 +34,6 @@ Route::get('/', function () {
     Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
