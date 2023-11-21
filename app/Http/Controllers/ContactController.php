@@ -5,29 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\Contact;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class ContactController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('index', 'show');
+        $this->middleware('auth');
     }
+
     public function index()
     {
-        $user = auth()->user();
+        $companies = Company::userCompanies();
 
-        $companies = $user->companies()->orderBy('name')->pluck('name', 'id')->prepend('All companies', '');
-        $contacts = $user->contacts()->latestFirst()->paginate(10);
+        $contacts = auth()->user()->contacts()->latestFirst()->paginate(10);
 
         return view('contacts.index', compact('contacts', 'companies'));
     }
 
-    public function show($id)
+    public function show(Contact $contact)
     {
-        $contact =  Contact::findOrFail($id);
-
         return view('contacts.show', compact('contact'));
     }
 
@@ -35,7 +32,7 @@ class ContactController extends Controller
     {
         $contact = new Contact;
 
-        $companies = auth()->user()->companies()->orderBy('name')->pluck('name', 'id')->prepend('All companies', '');
+        $companies = Company::userCompanies();
 
         return view('contacts.create', compact('companies', 'contact'));
     }
@@ -55,18 +52,15 @@ class ContactController extends Controller
         return redirect()->route('contacts.index')->with('message', 'Contact has been added!');
     }
 
-    public function edit($id)
+    public function edit(Contact $contact)
     {
-        $contact = Contact::findOrFail($id);
-
-        $companies = auth()->user()->companies()->orderBy('name')->pluck('name', 'id')->prepend('All companies', '');
+        $companies = Company::userCompanies();
 
         return View::make('contacts.edit', compact('companies', 'contact'));
     }
 
-    public function update($id, Request $request)
+    public function update(Request $request, Contact $contact)
     {
-
         $attributes = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -75,19 +69,16 @@ class ContactController extends Controller
             'company_id' => 'required|exists:companies,id',
         ]);
 
-        $contact = Contact::findOrFail($id);
-
         $contact->update($attributes);
 
         return redirect()->route('contacts.index')->with('message', 'Contact has been updated!');
     }
 
-    public function destroy($id)
+    public function destroy(Contact $contact)
     {
-        $contact = Contact::findOrFail($id);
-
         $contact->delete();
 
         return redirect()->route('contacts.index')->with('message', 'Contact has been deleted!');
     }
+
 }

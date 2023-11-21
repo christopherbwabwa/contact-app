@@ -7,4 +7,11 @@
 - You can apply CRUD operations to those contacts.
 - You can filter them by multiples fields like company, first_name, last_name, and so on...
 
-To get started you will need to create a account.
+To get started you can run the command:
+
+`` php artisan migrate:fresh --seed .``
+
+You will then get some fake data ( users, companies, and contacts) to quickly test.
+
+Each user has some companies with some contacts related.
+

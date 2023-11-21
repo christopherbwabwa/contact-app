@@ -47,7 +47,7 @@
 
                 <div class="items-center justify-center">
 
-                    <a href="{{ route('contacts.index') }}" class="ml-1 underline">
+                    <a href="{{ route('contacts.index') }}" class="ml-1 px-4 underline">
                         All contacts
                     </a>
 
