@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use App\Models\Company;
 use App\Models\Contact;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
 class ContactController extends Controller
@@ -37,17 +37,9 @@ class ContactController extends Controller
         return view('contacts.create', compact('companies', 'contact'));
     }
 
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email',
-            'address' => 'required',
-            'company_id' => 'required|exists:companies,id',
-        ]);
-
-        $request->user()->contacts()->create($request->all());
+        $request->user()->contacts()->create($request->validated());
 
         return redirect()->route('contacts.index')->with('message', 'Contact has been added!');
     }
@@ -59,17 +51,9 @@ class ContactController extends Controller
         return View::make('contacts.edit', compact('companies', 'contact'));
     }
 
-    public function update(Request $request, Contact $contact)
+    public function update(ContactRequest $request, Contact $contact)
     {
-        $attributes = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email',
-            'address' => 'required',
-            'company_id' => 'required|exists:companies,id',
-        ]);
-
-        $contact->update($attributes);
+        $contact->update($request->validated());
 
         return redirect()->route('contacts.index')->with('message', 'Contact has been updated!');
     }
@@ -79,6 +63,13 @@ class ContactController extends Controller
         $contact->delete();
 
         return redirect()->route('contacts.index')->with('message', 'Contact has been deleted!');
+    }
+
+    protected function validationRules()
+    {
+        return [
+            
+        ];
     }
 
 }
