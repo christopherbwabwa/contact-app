@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\SearchScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,6 +11,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Company extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public $searchColumns = ['name', 'address', 'website', 'email'];
+    
+    public static function booted()
+    {
+        parent::booted();
+
+        static::addGlobalScope(new SearchScope);
+    }
 
     public function contacts(): HasMany
     {
