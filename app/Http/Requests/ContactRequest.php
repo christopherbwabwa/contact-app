@@ -28,6 +28,7 @@ class ContactRequest extends FormRequest
             'last_name' => 'required',
             'email' => 'required|email',
             'address' => 'required',
+            'phone' => 'nullable',
             'company_id' => 'required|exists:companies,id',
         ];
     }
