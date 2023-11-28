@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -20,10 +19,13 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function update(ProfileUpdateRequest $request)
+    public function update(ProfileUpdateRequest $request )
     {
-        $request->user()->update($request->validated());
+       $profileData = $request->handleRequest($request);
+
+        $request->user()->update($profileData);
 
         return back()->with('message', 'Profile has been updated successfully!');
     }
+
 }
