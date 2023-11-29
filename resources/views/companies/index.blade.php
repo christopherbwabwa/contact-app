@@ -35,15 +35,10 @@
                                 </thead>
 
                                 <tbody>
-                                    @if ($message = session('message'))
-                                        <div class="alert alert-success">
-                                            {{ $message }}
-                                        </div>
-                                    @endif
+                                    @include('layouts._message')
                                     @if ($companies->count())
 
                                         @foreach ($companies as $index => $company)
-                                        {{-- @dd($company) --}}
                                             <tr>
                                                 <th scope="row">{{ $index + $companies->firstItem() }}</th>
                                                 <td>{{ $company->name }}</td>
