@@ -68,7 +68,7 @@
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                                 <div class="fileinput-new img-thumbnail"
                                                     style="width: 150px; height: 150px;">
-                                                    <img src="{{ $user->profile_picture ? asset('uploads/'. $user->profile_picture) : 'http://via.placeholder.com/150x150' }}" alt="...">
+                                                    <img src="{{ $user->profileUrl() }}" alt="...">
                                                 </div>
                                                 <div class="fileinput-preview fileinput-exists img-thumbnail"
                                                     style="max-width: 150px; max-height: 150px;"></div>
