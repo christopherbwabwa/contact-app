@@ -18,7 +18,7 @@ class Contact extends Model
     
     public function company()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class)->withoutGlobalScopes();
     }
 
     public function scopeLatestFirst($query)
