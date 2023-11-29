@@ -63,7 +63,7 @@
                                 </tbody>
                             </table>
 
-                            {{ $companies->links() }}
+                            {{ $companies->withQueryString()->links() }}
                         
                         </div>
                     </div>
