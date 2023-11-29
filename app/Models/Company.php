@@ -35,7 +35,7 @@ class Company extends Model
 
     public static function userCompanies()
     {
-        return self::where('user_id', auth()->id())->orderBy('name')->pluck('name', 'id')->prepend('All companies', '');
+        return self::withoutGlobalScope(SearchScope::class)->where('user_id', auth()->id())->orderBy('name')->pluck('name', 'id')->prepend('All companies', '');
     }
 
 }
