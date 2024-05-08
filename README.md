@@ -18,7 +18,7 @@ cp .env.example .env
 npm install && npm run dev
 ```
 
-You can seed some dummy data for testing with this command:
+You can run migrations & seed some dummy data for testing with this command:
 
 ``` php artisan migrate:fresh --seed ```
 
